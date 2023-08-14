@@ -1,4 +1,4 @@
-package com.example.hw6.ioc;
+package com.example.hw7.ioc;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
@@ -10,11 +10,11 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import com.example.hw6.command.Command;
-import com.example.hw6.ioc.adapter.InitAdapterGeneratorCommand;
-import com.example.hw6.ioc.scope_based.InitScopeBasedIoCImplCommand;
-import com.example.hw6.objects.SpaceshipObject;
-import com.example.hw6.operations.Movable;
+import com.example.hw7.command.Command;
+import com.example.hw7.ioc.adapter.InitAdapterGeneratorCommand;
+import com.example.hw7.ioc.scope_based.InitScopeBasedIoCImplCommand;
+import com.example.hw7.objects.SpaceshipObject;
+import com.example.hw7.operations.Movable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
