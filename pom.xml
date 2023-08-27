@@ -9,7 +9,7 @@
     <version>${revision}</version>
 
     <properties>
-        <revision>1.0.7</revision>
+        <revision>1.0.8</revision>
 
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -31,6 +31,7 @@
         <module>hw5</module>
         <module>hw6</module>
         <module>hw7</module>
+        <module>hw8</module>
     </modules>
 
 </project>
