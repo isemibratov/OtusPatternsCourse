@@ -1,11 +1,11 @@
-package com.example.hw6.ioc.adapter;
+package com.example.hw7.ioc.adapter;
 
-import com.example.hw6.command.Command;
-import com.example.hw6.command.log.LogUnprocessedMethodCommand;
-import com.example.hw6.command.operations.UpdateObjectPropertyCommand;
-import com.example.hw6.exception.exceptions.CommandException;
-import com.example.hw6.ioc.IoC;
-import com.example.hw6.objects.UObject;
+import com.example.hw7.command.Command;
+import com.example.hw7.command.log.LogUnprocessedMethodCommand;
+import com.example.hw7.command.operations.UpdateObjectPropertyCommand;
+import com.example.hw7.exception.exceptions.CommandException;
+import com.example.hw7.ioc.IoC;
+import com.example.hw7.objects.UObject;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
@@ -36,10 +36,10 @@ public class InitAdapterGeneratorCommand implements Command {
             var className = String.format("%sAdapter", adapterInterface.getSimpleName());
             var methods = adapterInterface.getMethods();
             var source = String.format(
-                    "package com.example.hw6.operations; public class %s implements %s { %s %s %s }",
+                    "package com.example.hw7.operations; public class %s implements %s { %s %s %s }",
                     className,
                     adapterInterface.getName(),
-                    "private final com.example.hw6.objects.UObject uObject;",
+                    "private final com.example.hw7.objects.UObject uObject;",
                     getConstructor(className),
                     getInterfaceMethods(methods));
 
@@ -47,7 +47,7 @@ public class InitAdapterGeneratorCommand implements Command {
             File root = Files.createTempDirectory("java").toFile();
             File sourceFile = new File(
                     root,
-                    String.format("com/example/hw6/operations/%s.java", className));
+                    String.format("com/example/hw7/operations/%s.java", className));
             sourceFile.getParentFile().mkdirs();
             Files.write(sourceFile.toPath(), source.getBytes(StandardCharsets.UTF_8));
 
@@ -58,7 +58,7 @@ public class InitAdapterGeneratorCommand implements Command {
             // Load and instantiate compiled class.
             URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{root.toURI().toURL()});
             Class<?> cls = Class.forName(
-                    String.format("com.example.hw6.operations.%s", className),
+                    String.format("com.example.hw7.operations.%s", className),
                     true,
                     classLoader);
             Constructor<?> constructor = cls.getConstructor(UObject.class);
@@ -80,7 +80,7 @@ public class InitAdapterGeneratorCommand implements Command {
 
     private String getConstructor(String className) {
         return String.format(
-                "public %s(com.example.hw6.objects.UObject uObject) { this.uObject = uObject;}",
+                "public %s(com.example.hw7.objects.UObject uObject) { this.uObject = uObject;}",
                 className);
     }
 
@@ -139,7 +139,7 @@ public class InitAdapterGeneratorCommand implements Command {
 
     private String prepareGetMethodBody(String propertyName, Type methodReturnType) {
         return String.format(
-                "return java.util.Optional.ofNullable(com.example.hw6.ioc.IoC.<%s>resolve(\"%s.get\", \"%s\", uObject));",
+                "return java.util.Optional.ofNullable(com.example.hw7.ioc.IoC.<%s>resolve(\"%s.get\", \"%s\", uObject));",
                 methodReturnType
                         .getTypeName()
                         .replace("java.util.Optional<", "")
@@ -168,7 +168,7 @@ public class InitAdapterGeneratorCommand implements Command {
 
     private String prepareSetMethodBody(String propertyName, Parameter param) {
         return String.format(
-                "com.example.hw6.ioc.IoC.<com.example.hw6.command.Command>resolve(\"%s.set\", \"%s\", uObject, %s).execute();",
+                "com.example.hw7.ioc.IoC.<com.example.hw7.command.Command>resolve(\"%s.set\", \"%s\", uObject, %s).execute();",
                 adapterInterface.getSimpleName(),
                 propertyName,
                 param.getName());
@@ -190,7 +190,7 @@ public class InitAdapterGeneratorCommand implements Command {
 
     private String prepareUnprocessedMethodBody(String propertyName) {
         return String.format(
-                "com.example.hw6.ioc.IoC.<com.example.hw6.command.Command>resolve(\"%s.unprocessed\", \"%s\", \"%s\").execute();",
+                "com.example.hw7.ioc.IoC.<com.example.hw7.command.Command>resolve(\"%s.unprocessed\", \"%s\", \"%s\").execute();",
                 adapterInterface.getSimpleName(),
                 adapterInterface.getSimpleName(),
                 propertyName);
