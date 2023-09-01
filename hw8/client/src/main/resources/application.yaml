@@ -1,0 +1,10 @@
+server:
+  port : 8080
+
+springdoc:
+  swagger-ui.path: /
+
+msa:
+  path:
+    auth: http://localhost:8095
+    game: http://localhost:8090
