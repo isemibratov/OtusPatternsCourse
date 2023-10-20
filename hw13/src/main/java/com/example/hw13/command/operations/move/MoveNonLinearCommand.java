@@ -1,11 +1,11 @@
-package com.example.hw7.command.operations.move;
+package com.example.hw13.command.operations.move;
 
-import com.example.hw7.command.Command;
-import com.example.hw7.command.operations.macro.RotateThenChangeVelocityVectorMacroCommand;
-import com.example.hw7.exception.ExceptionHandler;
-import com.example.hw7.ioc.IoC;
-import com.example.hw7.objects.UObject;
-import com.example.hw7.operations.Rotatable;
+import com.example.hw13.command.Command;
+import com.example.hw13.command.operations.macro.RotateThenChangeVelocityVectorMacroCommand;
+import com.example.hw13.exception.ExceptionHandler;
+import com.example.hw13.ioc.IoC;
+import com.example.hw13.game_objects.UObject;
+import com.example.hw13.operations.Rotatable;
 
 public class MoveNonLinearCommand implements Command {
     private final UObject movableAndRotatableObject;
